@@ -21,8 +21,7 @@ import reactor.core.publisher.Mono;
  *
  * 리액티브 스트림은 4개의 인터페이스인 Publisher(발행자), Subscriber(구독자), Subscription(구독), Processor(프로세서)로 요약가능
     * 발행자(Publisher)는 데이터를 생성하고
-    * 구독자(Subscriber)에게 데이터를 통지하고
-    * 구독자는 자신이 처리할 수 있는 만큼의 데이터를 요청하고 처리
+    * 구독자(Subscriber)는 Subscription를 통해 Publisher에게 자신이 처리할 수 있는 만큼의 데이터를 요청하고 처리
     * 이때 발행자가 제공할 수 있는 데이터의 양은 무한(unbounded) 하고 순차적(sequential) 처리를 보장
  *
  * 리액티브 스트림의 대표적인 구현체로는 Reactor, RxJava 등등이 있으며 우리는 Reactor을 알아볼 것이다.
