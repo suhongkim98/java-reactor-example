@@ -73,15 +73,15 @@ public class ReactiveStreamsTest
     void subscriber()
     {
         /**
-         * Subscriber가 구독을 신청하게 되면 Publisher로부터 이벤트를 수신할 수 있다.
+         * Subscriber가 구독을 신청하게 되면 Publisher로부터 이벤트를 수신받을 수 있다.
          * 이 이벤트들은 Subscriber 인터페이스의 메서드를 통해 전송된다.
             * onSubscribe, 구독시 최초에 한번만 호출
             * onNext, 구독자가 요구하는 데이터의 수 만큼 호출 (최대 java.lang.Long.MAX_VALUE)
             * onError, 에러 또는 더이상 처리할 수 없는 경우
             * onComplete, 	모든 처리가 정상적으로 완료된 경우
          *
-         * Subscriber가 수신할 첫 번째 이벤트는 onSubscribe()의 호출을 통해 이루어진다.
-         * Publisher가 onSubscribe()를 호출할 때 이 메서드의 인자로 Subscription 객체를 Subscriber에 전달한다.
+         * Subscriber가 수신할 첫 번째 이벤트는 onSubscribe 메서드의 호출을 통해 이루어진다.
+         * Publisher가 onSubscribe 메서드를 호출할 때 이 메서드의 인자로 Subscription 객체를 Subscriber에 전달한다.
          */
         Flux<String> flux = Flux.just("A", "B");
 
