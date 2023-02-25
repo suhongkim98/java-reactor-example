@@ -1,8 +1,8 @@
 # java-reactor-example
-Reactive Stream의 대표 구현체인 reacor를 공부하며 예제를 정리한 레포지토리입니다.
+Reactive Stream의 대표 구현체인 reactor를 공부하며 예제를 정리한 레포지토리입니다.
 
 # Marble Diagram
-리액티프 스트림즈를 이해하려면 마블 다이어그램에 대한 개념을 먼저 알아야합니다.
+리액티브 스트림즈를 이해하려면 마블 다이어그램에 대한 개념을 먼저 알아야합니다.
 
 리액티브 플로우는 마블 다이어그램 ( `marble diagram` ) 으로 나타냅니다.<br/>
 ![img.png](docs/images/img.png)<br/>
