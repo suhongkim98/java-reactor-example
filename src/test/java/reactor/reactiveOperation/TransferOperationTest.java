@@ -9,6 +9,9 @@ import reactor.test.StepVerifier;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 변환, 전환 오퍼레이션
+ */
 public class TransferOperationTest
 {
     /**

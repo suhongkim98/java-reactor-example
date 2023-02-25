@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
+ * 생성 오퍼레이션
  * 리액티브 스트림 시퀀스 생성하기
  * Flux와 Mono는 많은 펙토리 메서드를 제공한다.
  */

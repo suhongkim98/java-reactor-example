@@ -8,6 +8,9 @@ import reactor.util.function.Tuple2;
 
 import java.time.Duration;
 
+/**
+ * 조합 오퍼레이션
+ */
 public class CombinationOperationTest
 {
     @Test
