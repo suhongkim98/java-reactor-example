@@ -83,7 +83,7 @@ public class SubscriberTest
 
     @Test
     @DisplayName("dispose로 구독 취소가 가능하다")
-    public void 구독취소_테스트() throws Exception {
+    void 구독취소_테스트() throws Exception {
         Disposable disposable = Flux.interval(Duration.ofMillis(500))
             .subscribe(i -> System.out.println(i));
 
