@@ -93,7 +93,9 @@ public class TransferOperationTest
     }
 
     /**
+     * flatMap은 flatten + map이다.
      * flatMap() 오퍼레이션에서는 각 객체를 새로운 Mono나 Flux로 매핑하며, 해당 Mono나 Flux의 결과는 하나의 새로운 Flux가 된다.
+     * 즉 각각의 스트림이 된 후 flatten(평탄화) 과정을 통해 하나의 스트림으로 다시 합친다.
      * flatMap()을 subscribeOn()과 함께 사용하면 리액터 타입의 변환을 비동기적으로 수행할 수 있다.
      *
      * subscribeOn()을 호출하지 않는다면 이전 map()과 동일하게 동기적으로 처리가 되겠지만 subscribeOn()을 호출함으로써 map() 오퍼레이션이 비동기적으로 처리된다.
