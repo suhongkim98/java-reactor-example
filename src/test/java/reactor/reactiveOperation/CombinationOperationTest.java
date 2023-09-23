@@ -1,12 +1,15 @@
 package reactor.reactiveOperation;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import reactor.util.function.Tuple2;
 
 import java.time.Duration;
+import java.util.List;
 
 /**
  * 조합 오퍼레이션
@@ -102,5 +105,17 @@ public class CombinationOperationTest
             .expectNext("cheetah")
             .expectNext("squirrel")
             .verifyComplete();
+    }
+
+    @Test
+    @DisplayName("collectList로 여러 개의 데이터를 하나의 List에 원소로 포함시켜 Mono를 리턴한다")
+    void testCollectList() {
+        Flux<String> flux = Flux.concat(
+                Flux.just("a", "b", "c"),
+                Flux.just("d", "e", "f"),
+                Flux.just("h", "i"));
+
+        Assertions.assertInstanceOf(Mono.class, flux.collectList());
+        Assertions.assertInstanceOf(List.class, flux.collectList().block());
     }
 }
