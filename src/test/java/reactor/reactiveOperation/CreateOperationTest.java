@@ -24,6 +24,10 @@ public class CreateOperationTest
     {
         /**
          * Flux.just("A", "B")
+         * Flux.justOrEmpty(null) // null인 경우 onComplete 시그널 전송
+         * Flux.fromStream(..)
+         * Flux.using(..)
+         * Flux.generate(..)
          * Flux.fromArray(new Integer[] { 2, 4, 8 })
          * Flux.fromIterable(Arrays.asList(3, 6, 9))
          * Flux.range(1, 5);
@@ -32,6 +36,7 @@ public class CreateOperationTest
          * Flux.never() : onComplete, onError 신호까지 보내지 않음
          * Flux.error(throwable) : 바로 오류를 전파하는 시퀀스를 생성
          * Flux.defer(supplier) : 구독되는 순간에 supplier를 실행하여 시퀀스를 생성
+         * 등 공식문서 참고
          */
     }
 
