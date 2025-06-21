@@ -87,6 +87,36 @@ public class CombinationOperationTest
             .verifyComplete();
     }
 
+    @Test
+    @DisplayName("Flux.zip() 오퍼레이션 사용 시 한쪽이라도 소스 항목이 empty 라면 값을 방출하지 않는다.")
+    void testFluxZipIfEmpty() {
+        Flux<String> characterFlux = Flux
+                .just("Garfield",
+                        "Kojak",
+                        "Barbossa");
+        Flux<String> foodFlux = Flux
+                .just("Lasagna");
+
+
+        Flux<String> zippedFlux = Flux.zip(characterFlux, foodFlux, (c, f) -> c + " eats " + f);
+
+
+        // 하나만 성공, 나머지 두 요소는 무시
+        StepVerifier.create(zippedFlux)
+                .expectNext("Garfield eats Lasagna")
+                .verifyComplete();
+    }
+
+    @Test
+    @DisplayName("Mono.zip() 오퍼레이션 사용 시 양쪽 소스 항목 모두 존재해야 값을 방출한다.")
+    void testMonoZipIfEmpty() {
+        Mono<Tuple2<String, String>> zippedMono = Mono.zip(Mono.just("hello"), Mono.empty());
+
+        StepVerifier.create(zippedMono)
+                .expectComplete() // 값을 기대하지 않고, 완료되는지만 확인
+                .verify();
+    }
+
     /**
      * 두 개의 Flux 객체가 있는데 이것을 결합하는 대신 먼저 값을 방출하는 소스 Flux의 값을 발행하는 새로운 Flux를 생성하고 싶다면 first() 오퍼레이션을 사용하면 된다.
      */

@@ -1,5 +1,6 @@
 package reactor.reactiveOperation;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -120,5 +121,27 @@ public class TransferOperationTest
             .expectNextMatches(p -> list.contains(p))
             .expectNextMatches(p -> list.contains(p))
             .verifyComplete();
+    }
+
+    @Test
+    @DisplayName("defaultIfEmpty 는 데이터가 지나갈 때 빈값이 오면 다른 값으로 대체한다.")
+    void testDefaultIfEmpty() {
+        Mono<Object> mono = Mono.empty()
+                .defaultIfEmpty("hello");
+
+        StepVerifier.create(mono)
+                .expectNext("hello")
+                .verifyComplete();
+    }
+
+    @Test
+    @DisplayName("switchIfEmpty 는 데이터가 지나갈 때 빈값이 오면 다른 값으로 대체한다.")
+    void testSwitchIfEmpty() {
+        Mono<Object> mono = Mono.empty()
+                .switchIfEmpty(Mono.just("hello"));
+
+        StepVerifier.create(mono)
+                .expectNext("hello")
+                .verifyComplete();
     }
 }

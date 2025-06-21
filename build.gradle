@@ -14,9 +14,9 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     // https://mvnrepository.com/artifact/io.projectreactor/reactor-core
-    implementation 'io.projectreactor:reactor-core:3.5.3'
+    implementation 'io.projectreactor:reactor-core:3.7.7'
     // https://mvnrepository.com/artifact/io.projectreactor/reactor-test
-    testImplementation 'io.projectreactor:reactor-test:3.5.3'
+    testImplementation 'io.projectreactor:reactor-test:3.7.7'
 
 }
 
