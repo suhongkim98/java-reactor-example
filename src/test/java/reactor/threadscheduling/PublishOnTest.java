@@ -1,4 +1,4 @@
-package reactor.threadScheduling;
+package reactor.threadscheduling;
 
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;

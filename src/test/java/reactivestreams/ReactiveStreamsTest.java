@@ -1,4 +1,4 @@
-package reactiveStreams;
+package reactivestreams;
 
 import org.example.subscriber.MyCustomSubscriber;
 import org.junit.jupiter.api.Assertions;
@@ -9,10 +9,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * 리액티브 프로그래밍의 경우 순차적으로 수행되는 작업 단계를 나타낸 것이 아니라 데이터가 흘러가는 파이프라인이나 스트림을 표현한다.
- * 명령헝 프로그래밍은 동기식 작업을 처리하는 동안 waiting 상태로 전환하지만 리액티브 스트림즈은 전환되지 않고 처리 가능한 데이터가 있을 때마다 받아 처리하여 성능을 쥐어짜낸다.
+ * 리액티브 스트림은 데이터의 흐름을 선언적으로 표현하는 프로그래밍 모델이다.
+ * 리액티브 스트림은 non-blocking 방식으로 이벤트를 처리하여, 스레드를 대기 상태로 두지 않고 효율적으로 자원을 활용한다.
  * <p>
- * 리액티브 스트림은 non-blocking(넌블럭킹) backPressure(역압)을 이용하여 비동기 서비스를 할 때 기본이 되는 스펙이다.
+ * 리액티브 스트림즈는 non-blocking backpressure를 기반으로 비동기 스트림 처리의 표준을 정의한 스펙이다.
  * 차단되지 않는 백 프레셔를 갖는 비동기 스트림 처리의 표준을 제공하는 것이 목적, 비동기의 경계를 명확히하여 스트림 데이터의 교환을 효과적으로 관리한다.
  *
  * 리액티브 스트림은 4개의 인터페이스인 Publisher(발행자), Subscriber(구독자), Subscription(구독), Processor(프로세서)로 요약가능
@@ -39,7 +39,7 @@ public class ReactiveStreamsTest
     void b()
     {
         Mono.just("Craig")              // 첫번째 모노를 생성하고 방출
-            .map(n -> n.toUpperCase())       // 오퍼레이션에 전달되어 대문자로 변경하고 다른 Mono를 생성
+            .map(String::toUpperCase)       // 오퍼레이션에 전달되어 대문자로 변경하고 다른 Mono를 생성
             .map(cn -> "Hello, " + cn + "!") // 두 번째 Mono가 값을 방출하면 두 번째 map() 오퍼레이션에 전달되어 문자열 결합이 수행
             .subscribe(System.out::println); // subscribe() 호출에서는 세 번째 Mono를 구독하여 데이터를 수신하고 출력
     }

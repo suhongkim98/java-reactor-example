@@ -14,7 +14,7 @@ Reactive Stream의 대표 구현체인 reactor를 공부하며 예제를 정리�
 # 공부순서
 테스트코드에 주석으로 개념을 설명합니다. 다음 순서에 따라 테스트코드를 따라가며 공부합니다.
 
-* `reactiveStreams` 디렉토리
+* `reactivestreams` 디렉토리
 * `reactor` 디렉토리
 
 

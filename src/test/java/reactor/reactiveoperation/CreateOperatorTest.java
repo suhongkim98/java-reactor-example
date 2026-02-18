@@ -1,4 +1,4 @@
-package reactor.reactiveOperation;
+package reactor.reactiveoperation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,12 +16,10 @@ import java.util.stream.Stream;
  * 리액티브 스트림 시퀀스 생성하기
  * Flux와 Mono는 많은 펙토리 메서드를 제공한다.
  */
-public class CreateOperationTest
-{
+public class CreateOperatorTest {
     @Test
     @DisplayName("create flux")
-    void createFlux()
-    {
+    void createFlux() {
         /**
          * Flux.just("A", "B")
          * Flux.justOrEmpty(null) // null인 경우 onComplete 시그널 전송
@@ -42,8 +40,7 @@ public class CreateOperationTest
 
     @Test
     @DisplayName("create mono")
-    void createMono()
-    {
+    void createMono() {
         /**
          * Mono.just("devljh")
          * Mono.justOrEmpty(null) : nullable, Optional.empty 모두 가능
@@ -61,38 +58,53 @@ public class CreateOperationTest
     }
 
     @Test
-    @DisplayName("just")
-    void just()
-    {
+    @DisplayName("just는 즉시 시퀀스를 생성한다.")
+    void just() {
         // just는 즉시 시퀀스를 만든다.
         Mono<String> mono = Mono.just("A");
         Flux<String> flux = Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry");
     }
 
     @Test
+    @DisplayName("defer는 구독되는 순간에 시퀀스를 생성한다.")
+    void testDefer() {
+        Mono<String> mono = Mono.defer(() -> {
+            System.out.println("2번 출력");
+            return Mono.just("A");
+        });
+        Flux<String> flux = Flux.defer(() -> {
+            System.out.println("2번 출력");
+            return Flux.just("Apple", "Orange", "Grape", "Banana", "Strawberry");
+        });
+
+        System.out.println("1번 출력");
+
+        // 3번 출력
+        flux.subscribe(a -> System.out.println(a));
+    }
+
+    @Test
     @DisplayName("배열로부터 시퀀스 만들기")
-    void createFlux_fromArray()
-    {
+    void createFlux_fromArray() {
         String[] fruits = new String[]
-            {
-                "Apple", "Orange", "Grape", "Banana", "Strawberry"
-            };
+                {
+                        "Apple", "Orange", "Grape", "Banana", "Strawberry"
+                };
         Flux<String> fruitFlux = Flux.fromArray(fruits);
 
 
         StepVerifier.create(fruitFlux)
-            .expectNext("Apple")
-            .expectNext("Orange")
-            .expectNext("Grape")
-            .expectNext("Banana")
-            .expectNext("Strawberry")
-            .verifyComplete();
+                .expectNext("Apple")
+                .expectNext("Orange")
+                .expectNext("Grape")
+                .expectNext("Banana")
+                .expectNext("Strawberry")
+                .verifyComplete();
     }
 
     @Test
     @DisplayName("컬렉션으로부터 시퀀스 만들기(List, Set, Iterable)")
-    void createFlux_fromIterable()
-    {
+    void createFlux_fromIterable() {
         List<String> fruitList = new ArrayList<>();
         fruitList.add("Apple");
         fruitList.add("Orange");
@@ -105,69 +117,65 @@ public class CreateOperationTest
 
 
         StepVerifier.create(fruitFlux)
-            .expectNext("Apple")
-            .expectNext("Orange")
-            .expectNext("Grape")
-            .expectNext("Banana")
-            .expectNext("Strawberry")
-            .verifyComplete();
+                .expectNext("Apple")
+                .expectNext("Orange")
+                .expectNext("Grape")
+                .expectNext("Banana")
+                .expectNext("Strawberry")
+                .verifyComplete();
     }
 
     @Test
     @DisplayName("스트림으로부터 시퀀스 만들기")
-    void createFlux_fromStream()
-    {
+    void createFlux_fromStream() {
         Stream<String> fruitStream =
-            Stream.of("Apple", "Orange", "Grape", "Banana", "Strawberry");
+                Stream.of("Apple", "Orange", "Grape", "Banana", "Strawberry");
 
 
         Flux<String> fruitFlux = Flux.fromStream(fruitStream);
 
 
         StepVerifier.create(fruitFlux)
-            .expectNext("Apple")
-            .expectNext("Orange")
-            .expectNext("Grape")
-            .expectNext("Banana")
-            .expectNext("Strawberry")
-            .verifyComplete();
+                .expectNext("Apple")
+                .expectNext("Orange")
+                .expectNext("Grape")
+                .expectNext("Banana")
+                .expectNext("Strawberry")
+                .verifyComplete();
     }
 
     @Test
     @DisplayName("range로 시퀀스 만들기")
-    void createFlux_range()
-    {
+    void createFlux_range() {
         Flux<Integer> intervalFlux = Flux.range(1, 5);
 
 
         StepVerifier.create(intervalFlux)
-            .expectNext(1)
-            .expectNext(2)
-            .expectNext(3)
-            .expectNext(4)
-            .expectNext(5)
-            .verifyComplete();
+                .expectNext(1)
+                .expectNext(2)
+                .expectNext(3)
+                .expectNext(4)
+                .expectNext(5)
+                .verifyComplete();
     }
 
     @Test
     @DisplayName("interval로 생성예제")
-    void createFlux_interval()
-    {
+    void createFlux_interval() {
         Flux<Long> intervalFlux = Flux.interval(Duration.ofSeconds(1)).take(5); // take(5) : 최대 5개 항목으로 결과를 제한
 
         StepVerifier.create(intervalFlux)
-            .expectNext(0L)
-            .expectNext(1L)
-            .expectNext(2L)
-            .expectNext(3L)
-            .expectNext(4L)
-            .verifyComplete();
+                .expectNext(0L)
+                .expectNext(1L)
+                .expectNext(2L)
+                .expectNext(3L)
+                .expectNext(4L)
+                .verifyComplete();
     }
 
     @Test
     @DisplayName("fromSupplier, defer")
-    void fromSupplier() throws Exception
-    {
+    void fromSupplier() throws Exception {
         /**
          * fromSupplier과 defer는 구독시점에 시퀀스를 생성한다. (lazy 처리)
          */
